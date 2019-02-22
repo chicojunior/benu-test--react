@@ -17,12 +17,17 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div>
-          <label>Location: <input type="text" onChange={this.setLocation} /></label>
-        </div>
-        <div>
-          <MapContainer location={this.state.location} />
+      <div className="app">
+        <input 
+          className="app__search-input" 
+          type="text" 
+          onChange={this.setLocation} 
+          placeholder="Location"
+        />
+        <div className="app__map-container">
+        <MapContainer  
+          location={this.state.location} 
+        />
         </div>
       </div>
     );

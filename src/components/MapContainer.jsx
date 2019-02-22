@@ -3,15 +3,13 @@ import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
 import ApolloClient from "apollo-boost"
 import gql from "graphql-tag"
 
-const client = new ApolloClient({
-  uri: 'https://dev-api.benu.at/graphql'
-})
+const client = new ApolloClient({ uri: 'https://dev-api.benu.at/graphql' })
 
 const API_KEY = 'AIzaSyCHhAP0kyhv-Y80JlaKypgjiBKrOZmvFnc'
 
 const mapStyles = {
   width: '100%',
-  height: '100%'
+  height: '82%'
 }
 
 class MapContainer extends Component {
@@ -86,12 +84,13 @@ class MapContainer extends Component {
         style={mapStyles}
         initialCenter={{lat: 47.5162, lng: 14.5501 }}
       >
-        {
-          geoLocs.map((marker, i) => {
-            console.log(marker)
-            return <Marker key={i} title={marker.name} position={marker.location} />
-          })
-        }
+        {geoLocs.map((marker, i) => (
+          <Marker 
+            key={i} 
+            title={marker.name} 
+            position={marker.location} 
+          />
+        ))}
       </Map>
     )
   }
