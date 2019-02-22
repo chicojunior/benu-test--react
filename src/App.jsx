@@ -7,25 +7,19 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      location: ''
-    }
-    this.getLocation = this.getLocation.bind(this)
+    this.state = { location: '' }
+    this.setLocation = this.setLocation.bind(this)
   }
 
-  getLocation(event) {
-    this.setState({
-      location: event.target.value
-    })
+  setLocation(event) {
+    this.setState({ location: event.target.value })
   }
 
   render() {
     return (
       <div className="App">
         <div>
-          <label>
-            Location: <input type="text" onChange={this.getLocation} />
-          </label>
+          <label>Location: <input type="text" onChange={this.setLocation} /></label>
         </div>
         <div>
           <MapContainer location={this.state.location} />
