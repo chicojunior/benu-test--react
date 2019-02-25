@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+// import { axios } from "axios"
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
 import ApolloClient from "apollo-boost"
 import gql from "graphql-tag"
+
+const axios = require('axios')
 
 const client = new ApolloClient({ uri: 'https://dev-api.benu.at/graphql' })
 
@@ -49,28 +52,29 @@ class MapContainer extends Component {
 
   geocodeLocations(locations) {
     let geolocations = []
+
     locations.map(location => {
-      fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location.city}&key=${API_KEY}`)
-      .then(response => {
-        if (!response.ok) throw response
-        return response.json()
+      axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+        params: {
+          address: location.city,
+          key: API_KEY
+        }
       })
-      .catch(err => {
-        err.json().then(errorMessage => {
-          this.setState({
-            error: errorMessage
-          })
-        })
-      })
-      .then(json => {
-        json.results.map(res => {
+      .then((response) => {
+        response.data.results.map(result => {
           const place = {
-            name: res.formatted_address,
-            location: res.geometry.location
+            name: result.formatted_address,
+            location: result.geometry.location
           } 
           geolocations.push(place)
           this.setState({ geolocations: geolocations })
         })
+      })
+      .catch((error) => {
+        this.setState({
+          error: error
+        })
+        // error.json().then(errorMessage => {})
       })
     })
   }
