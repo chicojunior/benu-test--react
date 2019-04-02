@@ -1,19 +1,12 @@
 import React, { Component } from 'react'
-// import { axios } from "axios"
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
 import ApolloClient from "apollo-boost"
 import gql from "graphql-tag"
 
 const axios = require('axios')
-
 const client = new ApolloClient({ uri: 'https://dev-api.benu.at/graphql' })
-
 const API_KEY = 'AIzaSyCHhAP0kyhv-Y80JlaKypgjiBKrOZmvFnc'
-
-const mapStyles = {
-  width: '100%',
-  height: '82%'
-}
+const mapStyles = { width: '100%', height: '82%' }
 
 class MapContainer extends Component {
 
@@ -74,7 +67,6 @@ class MapContainer extends Component {
         this.setState({
           error: error
         })
-        // error.json().then(errorMessage => {})
       })
     })
   }

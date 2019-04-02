@@ -4,14 +4,9 @@ import MapContainer from "./components/MapContainer";
 
 
 class App extends Component {
+  state = { location: '' }
 
-  constructor(props) {
-    super(props)
-    this.state = { location: '' }
-    this.setLocation = this.setLocation.bind(this)
-  }
-
-  setLocation(event) {
+  setLocation = (event) => {
     this.setState({ location: event.target.value })
   }
 
@@ -25,9 +20,7 @@ class App extends Component {
           placeholder="Location"
         />
         <div className="app__map-container">
-        <MapContainer  
-          location={this.state.location} 
-        />
+        <MapContainer location={this.state.location} />
         </div>
       </div>
     );
